@@ -1,0 +1,18 @@
+[project]
+name = "ranked-stats-rpc"
+version = "1.0"
+requires-python = ">=3.14.10"
+description = "Discord RPC app that shows statisctics of any player in MCSR Ranked"
+dependencies = [
+    "requests",
+    "pypresence",
+    "python-dotenv",
+]
+
+[tool.pyright]
+venvPath = "."
+venv = ".venv"  # Change to ".venv" if your folder has a dot prefix
+reportAny = false
+
+[tool.ruff.lint.isort]
+no-sections = true
