@@ -28,5 +28,10 @@ Now it can only show:
  
  10. Run using  `python main.py` in the terminal.
 
+ ## Troubleshooting
+ If you have any issues make sure you did all installation steps correctly
+
+ If the problem still exists, report an issue.
+
  ### Honorable mentions
   - Thanks to [@NaddyMC](https://github.com/nadoms) for help in understanding the MCSR Ranked API
