@@ -1,6 +1,6 @@
 # Ranked Stats RPC
 Discord Rich Presence integration that shows statisctics of any player in MCSR Ranked.
-![preview.gif](./preview.gif)
+![preview.gif](./assets/preview.gif)
 
 Now it can only show:
 
@@ -10,7 +10,7 @@ Now it can only show:
 -  Played matches in current season
 
  ## Installation
- 1. Make an application at [Discord Developer Portal](https://discord.com/developers/home). You can name it for example "Ranked Stats" and use this icon if you want.
+ 1. Make an application at [Discord Developer Portal](https://discord.com/developers/home). You can name it for example "Ranked Stats" and use [this icon](https://github.com/AntonyBand/ranked-stats-rpc/blob/main/assets/ranked_icon.png?raw=true) if you want.
  
  2. Open "General Information" section in the app settings and copy the Client ID. We'll use it for later.
  
