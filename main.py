@@ -5,8 +5,10 @@ from pypresence.types import ActivityType
 from requests import get
 from time import sleep
 
+_ = load_dotenv() # Load CLIENT_ID and NICKNAME variables from .env
+
 # Ranked API variables
-nickname = "Feinberg"
+nickname = getenv("NICKNAME")
 endpoint = "https://api.mcsrranked.com/"
 uuid = get(f"{endpoint}users/{nickname}").json()["data"]["uuid"]
 
@@ -73,7 +75,6 @@ def get_pb():
 
 
 # Rich Presence init
-_ = load_dotenv() # Load CLIENT_ID variable from .env
 rpc = Presence(getenv("CLIENT_ID"))
 rpc.connect()
 
