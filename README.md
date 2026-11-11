@@ -37,5 +37,5 @@ Now it can only show:
   - Thanks to [@NaddyMC](https://github.com/nadoms) for help in understanding the MCSR Ranked API
 
 ### TO-DO
-[] Make binaries
-[] Add system tray support
+[] - Make binaries
+[] - Add system tray support
