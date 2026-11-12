@@ -1,14 +1,15 @@
-from dotenv import load_dotenv
-from os import getenv
+import configparser
 from pypresence import Presence
 from pypresence.types import ActivityType
 from requests import get
 from time import sleep
 
-_ = load_dotenv() # Load CLIENT_ID and NICKNAME variables from .env
+config = configparser.ConfigParser()
+config.read("config.ini")
+rpc = Presence(config["settings"]["client_id"])
 
 # Ranked API variables
-nickname = getenv("NICKNAME")
+nickname = config["settings"]["nickname"]
 endpoint = "https://api.mcsrranked.com/"
 uuid = get(f"{endpoint}users/{nickname}").json()["data"]["uuid"]
 
@@ -75,7 +76,6 @@ def get_pb():
 
 
 # Rich Presence init
-rpc = Presence(getenv("CLIENT_ID"))
 rpc.connect()
 
 # Get all stats once
