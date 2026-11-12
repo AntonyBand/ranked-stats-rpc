@@ -12,7 +12,7 @@ config_path = path.join(
     "config.ini"
 )
 
-_ = config.read(config_path)
+_ = config.read(config_path, encoding="utf-8-sig")
 
 rpc = Presence(config["settings"]["client_id"])
 
