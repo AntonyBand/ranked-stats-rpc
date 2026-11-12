@@ -14,20 +14,7 @@ Now it can only show:
  
  2. Open "General Information" section in the app settings and copy the Client ID. We'll use it for later.
  
- 3. Install latest [Python](https://python.org) version.
-
- 4. Install all the dependencies using  `pip install requests pypresence dotenv`  in the terminal
- 
- 4. Clone this repo (Click "Code"  and the "Download ZIP" or using your favorite method).
- 
- 5. Extract the archive where you want to keep the program.
- 
- 8. In the folder rename .env.example to .env.
- 
- 9. Insert your Client ID and nickname in the .env file.
- 
- 10. Run using  `python main.py` in the terminal.
-
+ 3. Go to Releases and grab latest version for your system.
  ## Troubleshooting
  If you have any issues make sure you did all installation steps correctly
 
