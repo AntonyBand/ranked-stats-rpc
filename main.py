@@ -1,6 +1,6 @@
 import configparser
 from os import path
-from pypresence import Presence
+from pypresence.presence import Presence
 from pypresence.types import ActivityType
 from requests import get
 from sys import argv
