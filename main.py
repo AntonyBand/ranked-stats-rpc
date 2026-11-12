@@ -1,11 +1,19 @@
 import configparser
+from os import path
 from pypresence import Presence
 from pypresence.types import ActivityType
 from requests import get
+from sys import argv
 from time import sleep
 
 config = configparser.ConfigParser()
-config.read("config.ini")
+config_path = path.join(
+    path.dirname(path.abspath(argv[0])),
+    "config.ini"
+)
+
+_ = config.read(config_path)
+
 rpc = Presence(config["settings"]["client_id"])
 
 # Ranked API variables
