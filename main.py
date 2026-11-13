@@ -1,4 +1,5 @@
 import configparser
+from datetime import datetime
 from os import path
 from pypresence.presence import Presence
 from pypresence.types import ActivityType
@@ -6,13 +7,20 @@ from requests import get
 from sys import argv
 from time import sleep
 
+
+def log(message):
+    now = datetime.now().strftime("(%H:%M:%S)")
+    print(f"{now} {message}")
+log("Starting...")
+
 config = configparser.ConfigParser()
 config_path = path.join(
     path.dirname(path.abspath(argv[0])),
     "config.ini"
 )
-
 _ = config.read(config_path, encoding="utf-8-sig")
+log("Loaded config")
+
 
 rpc = Presence(config["settings"]["client_id"])
 
@@ -85,14 +93,18 @@ def get_pb():
 
 # Rich Presence init
 rpc.connect()
+log("Connected to RPC")
 
 # Get all stats once
+log("Getting statistics...")
 stats = {
     "elo": get_elo(),
     "matches": get_matches_played(),
     "pb":  get_pb(),
     "avg": get_average(played),
 }
+log("Stats are up to date. Entering Main Loop.")
+
 # Main Loop
 while True:
     timer = 0
@@ -103,15 +115,16 @@ while True:
         elo = get_elo()
         pb = get_pb()
         timer = 0
-        print("Stats updated!")
+        log("Stats were updated.")
 
-    for value in stats.values():
+    for stat in stats.values():
         rpc.update(
             activity_type=ActivityType.LISTENING,
             details=f"- {nickname} -",
             details_url="https://mcsrranked.com/stats/AntonyBand",
-            state=value,
+            state=stat,
             instance=True
         )
+        log(stat)
         sleep(5)
     timer += 5
