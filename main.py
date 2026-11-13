@@ -14,6 +14,7 @@ def log(message):
 log("Starting...")
 
 config = configparser.ConfigParser()
+
 config_path = path.join(
     path.dirname(path.abspath(argv[0])),
     "config.ini"
@@ -21,21 +22,18 @@ config_path = path.join(
 _ = config.read(config_path, encoding="utf-8-sig")
 log("Loaded config")
 
-
 rpc = Presence(config["settings"]["client_id"])
 
-# Ranked API variables
 nickname = config["settings"]["nickname"]
 endpoint = "https://api.mcsrranked.com/"
 uuid = get(f"{endpoint}users/{nickname}").json()["data"]["uuid"]
 
-# Main functions
-def get_matches_played(): # Get number of ranked matches
+def get_matches_played():
     global played
     played = get(f"{endpoint}users/{nickname}").json()["data"]["statistics"]["season"]["playedMatches"]["ranked"]
     return(f"{played} matches")
 
-def get_average(played: int): # Get average completion time
+def get_average(played: int):
     total_ms = 0
     completions = 0
     last_id = None
@@ -90,12 +88,9 @@ def get_pb():
     s = int(pb_ms % 60000) // 1000
     return(f"PB - {m}:{s:02d}")
 
-
-# Rich Presence init
 rpc.connect()
 log("Connected to RPC")
 
-# Get all stats once
 log("Getting statistics...")
 stats = {
     "elo": get_elo(),
@@ -103,12 +98,11 @@ stats = {
     "pb":  get_pb(),
     "avg": get_average(played),
 }
-log("Stats are up to date. Entering Main Loop.")
+log("Stats are up to date. Entering Main Loop")
 
 # Main Loop
 while True:
     timer = 0
-    # Update stats from API every 3 minutes
     if timer >= 180:
         matches = get_matches_played()
         average = get_average(played)
