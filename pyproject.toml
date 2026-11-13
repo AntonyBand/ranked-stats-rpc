@@ -1,7 +1,7 @@
 [project]
 name = "ranked-stats-rpc"
 version = "1.0"
-requires-python = ">=3.14.10"
+requires-python = ">=3.14"
 description = "Discord RPC app that shows statisctics of any player in MCSR Ranked"
 dependencies = [
     "requests",

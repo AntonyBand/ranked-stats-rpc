@@ -1,24 +1,39 @@
-from dotenv import load_dotenv
-from os import getenv
-from pypresence import Presence
+import configparser
+from datetime import datetime
+from os import path
+from pypresence.presence import Presence
 from pypresence.types import ActivityType
 from requests import get
+from sys import argv
 from time import sleep
 
-_ = load_dotenv() # Load CLIENT_ID and NICKNAME variables from .env
 
-# Ranked API variables
-nickname = getenv("NICKNAME")
+def log(message):
+    now = datetime.now().strftime("(%H:%M:%S)")
+    print(f"{now} {message}")
+log("Starting...")
+
+config = configparser.ConfigParser()
+
+config_path = path.join(
+    path.dirname(path.abspath(argv[0])),
+    "config.ini"
+)
+_ = config.read(config_path, encoding="utf-8-sig")
+log("Loaded config")
+
+rpc = Presence(config["settings"]["client_id"])
+
+nickname = config["settings"]["nickname"]
 endpoint = "https://api.mcsrranked.com/"
 uuid = get(f"{endpoint}users/{nickname}").json()["data"]["uuid"]
 
-# Main functions
-def get_matches_played(): # Get number of ranked matches
+def get_matches_played():
     global played
     played = get(f"{endpoint}users/{nickname}").json()["data"]["statistics"]["season"]["playedMatches"]["ranked"]
     return(f"{played} matches")
 
-def get_average(played: int): # Get average completion time
+def get_average(played: int):
     total_ms = 0
     completions = 0
     last_id = None
@@ -73,37 +88,37 @@ def get_pb():
     s = int(pb_ms % 60000) // 1000
     return(f"PB - {m}:{s:02d}")
 
-
-# Rich Presence init
-rpc = Presence(getenv("CLIENT_ID"))
 rpc.connect()
+log("Connected to RPC")
 
-# Get all stats once
+log("Getting statistics...")
 stats = {
     "elo": get_elo(),
     "matches": get_matches_played(),
     "pb":  get_pb(),
     "avg": get_average(played),
 }
+log("Stats are up to date. Entering Main Loop")
+
 # Main Loop
 while True:
     timer = 0
-    # Update stats from API every 3 minutes
     if timer >= 180:
         matches = get_matches_played()
         average = get_average(played)
         elo = get_elo()
         pb = get_pb()
         timer = 0
-        print("Stats updated!")
+        log("Stats were updated.")
 
-    for value in stats.values():
+    for stat in stats.values():
         rpc.update(
             activity_type=ActivityType.LISTENING,
             details=f"- {nickname} -",
             details_url="https://mcsrranked.com/stats/AntonyBand",
-            state=value,
+            state=stat,
             instance=True
         )
+        log(stat)
         sleep(5)
     timer += 5

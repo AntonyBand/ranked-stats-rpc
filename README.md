@@ -14,20 +14,13 @@ Now it can only show:
  
  2. Open "General Information" section in the app settings and copy the Client ID. We'll use it for later.
  
- 3. Install latest [Python](https://python.org) version.
+ 3. Go to Releases and grab the latest archive for your system. 
+ 
+ 4. Extract the archive wherever it's convenient for you.
 
- 4. Install all the dependencies using  `pip install requests pypresence dotenv`  in the terminal
+ 5. Open  `config.ini`  file and enter your nickname and the Client ID. It should look like this
  
- 4. Clone this repo (Click "Code"  and the "Download ZIP" or using your favorite method).
- 
- 5. Extract the archive where you want to keep the program.
- 
- 8. In the folder rename .env.example to .env.
- 
- 9. Insert your Client ID and nickname in the .env file.
- 
- 10. Run using  `python main.py` in the terminal.
-
+ 6. Now you can run  `ranked-stats-rpc` file and check your Discord profile. 
  ## Troubleshooting
  If you have any issues make sure you did all installation steps correctly
 
@@ -36,6 +29,9 @@ Now it can only show:
  ### Honorable mentions
   - Thanks to [@NaddyMC](https://github.com/nadoms) for help in understanding the MCSR Ranked API
 
+ ### Compiling yourself
+  I used Nuitka for making binaries:  `python -m nuitka --mode=onefile main.py --output-dir=build`
+  
 ### TO-DO
-- [ ] Make binaries
+- [x] Make binaries
 - [ ] Add system tray support
