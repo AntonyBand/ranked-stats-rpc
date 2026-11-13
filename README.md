@@ -20,7 +20,7 @@ Now it can only show:
 
  5. Open  `config.ini`  file and enter your nickname and the Client ID. It should look like this
  
- 6. Now you can run  `ranked-stats-rpc` file and check your Discord profile. 
+ 6. Now you can run (Double click on Windows, using terminal on Linux)  `ranked-stats-rpc` file and check your Discord profile. 
  ## Troubleshooting
  If you have any issues make sure you did all installation steps correctly
 
