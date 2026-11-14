@@ -6,7 +6,6 @@ description = "Discord RPC app that shows statisctics of any player in MCSR Rank
 dependencies = [
     "requests",
     "pypresence",
-    "python-dotenv",
 ]
 
 [tool.pyright]
