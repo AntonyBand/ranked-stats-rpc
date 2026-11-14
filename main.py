@@ -8,7 +8,7 @@ from sys import argv
 from time import sleep
 
 
-def log(message):
+def log(message: str):
     now = datetime.now().strftime("(%H:%M:%S)")
     print(f"{now} {message}")
 log("Starting...")
@@ -112,13 +112,13 @@ while True:
         log("Stats were updated.")
 
     for stat in stats.values():
-        rpc.update(
+        rpc.update(  # pyright: ignore[reportUnknownMemberType]
             activity_type=ActivityType.LISTENING,
             details=f"- {nickname} -",
             details_url="https://mcsrranked.com/stats/AntonyBand",
             state=stat,
             instance=True
         )
-        log(stat)
+        log(str(stat))
         sleep(5)
     timer += 5
